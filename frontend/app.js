@@ -67,6 +67,18 @@ async function renderResult(data) {
   placeholder.classList.add('hidden');
   img.classList.remove('hidden');
 
+  // Add download button
+  const existingBtn = document.getElementById('download-btn');
+  if (existingBtn) existingBtn.remove();
+
+  const downloadBtn = document.createElement('a');
+  downloadBtn.id = 'download-btn';
+  downloadBtn.href = `${API_BASE}/api/image/${data.image_filename}`;
+  downloadBtn.download = data.image_filename;
+  downloadBtn.textContent = 'DOWNLOAD IMAGE →';
+  downloadBtn.target = '_blank';
+  document.getElementById('output-block').appendChild(downloadBtn);
+
   // Populate report
   document.getElementById('positive-prompt').textContent = data.positive_prompt;
   document.getElementById('negative-prompt').textContent = data.negative_prompt;

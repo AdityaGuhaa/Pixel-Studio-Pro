@@ -377,5 +377,26 @@ footer {
   border-top: 1px solid var(--border);
 }
 
+/* ---- DOWNLOAD BUTTON ---- */
+#download-btn {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--orange);
+  color: var(--bg);
+  text-align: center;
+  padding: 1rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+#download-btn:hover { background: var(--orange-dim); }
+
 /* ---- UTILS ---- */
 .hidden { display: none !important; }
