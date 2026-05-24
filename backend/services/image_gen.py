@@ -40,7 +40,7 @@ async def generate_image(positive: str, negative: str) -> dict:
     )
 
     # --- Submit job to ComfyUI queue ---
-    async with httpx.AsyncClient(timeout=30.0) as client:
+    async with httpx.AsyncClient(timeout=120.0) as client:
         response = await client.post(
             f"{COMFYUI_URL}/prompt",
             json={"prompt": workflow, "client_id": client_id}
@@ -49,7 +49,10 @@ async def generate_image(positive: str, negative: str) -> dict:
         prompt_id = response.json()["prompt_id"]
 
     # --- Wait for job completion via WebSocket ---
-    image_filename = await wait_for_completion(client_id, prompt_id)
+    await wait_for_completion(client_id, prompt_id)
+
+    # --- Poll history until outputs appear ---
+    image_filename = await poll_history(prompt_id)
 
     return {
         "prompt_id": prompt_id,
@@ -57,33 +60,45 @@ async def generate_image(positive: str, negative: str) -> dict:
     }
 
 
-async def wait_for_completion(client_id: str, prompt_id: str) -> str:
+async def wait_for_completion(client_id: str, prompt_id: str):
     """
     Connects to ComfyUI WebSocket and waits for the job to finish.
-    Returns the output image filename.
     """
     ws_url = f"{COMFYUI_WS_URL}/ws?clientId={client_id}"
 
     async with websockets.connect(ws_url) as ws:
         while True:
-            message = await ws.recv()
-            data = json.loads(message)
+            try:
+                message = await asyncio.wait_for(ws.recv(), timeout=120.0)
+                data = json.loads(message)
 
-            if data.get("type") == "executing":
-                node = data["data"].get("node")
-                if node is None and data["data"].get("prompt_id") == prompt_id:
-                    # Job complete
-                    break
+                if data.get("type") == "executing":
+                    node = data["data"].get("node")
+                    if node is None and data["data"].get("prompt_id") == prompt_id:
+                        break
 
-    # --- Fetch output image filename from ComfyUI history ---
+            except asyncio.TimeoutError:
+                break
+
+
+async def poll_history(prompt_id: str, max_retries: int = 20) -> str:
+    """
+    Polls ComfyUI history endpoint until outputs are available.
+    Returns the output image filename.
+    """
     async with httpx.AsyncClient(timeout=30.0) as client:
-        response = await client.get(f"{COMFYUI_URL}/history/{prompt_id}")
-        response.raise_for_status()
-        history = response.json()
+        for attempt in range(max_retries):
+            await asyncio.sleep(5)
+            response = await client.get(f"{COMFYUI_URL}/history/{prompt_id}")
+            response.raise_for_status()
+            history = response.json()
 
-    outputs = history[prompt_id]["outputs"]
-    for node_id, node_output in outputs.items():
-        if "images" in node_output:
-            return node_output["images"][0]["filename"]
+            if prompt_id not in history:
+                continue
+
+            outputs = history[prompt_id].get("outputs", {})
+            for node_id, node_output in outputs.items():
+                if "images" in node_output and node_output["images"]:
+                    return node_output["images"][0]["filename"]
 
     return "unknown.png"

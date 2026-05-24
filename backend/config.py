@@ -19,12 +19,15 @@ E2B_MODEL_PATH = "/home/adityaguha/gemma-4-E2B-it-Q4_K_M.gguf"
 E4B_MODEL_PATH = "/home/adityaguha/gemma-4-E4B-it-Q4_K_M.gguf"
 
 # --- Generation defaults ---
-DEFAULT_STEPS = 20
-DEFAULT_CFG = 1.0               # Flux uses low CFG (1.0 - 3.5)
-DEFAULT_WIDTH = 768
-DEFAULT_HEIGHT = 768
-DEFAULT_SAMPLER = "euler"
-DEFAULT_SCHEDULER = "simple"
+DEFAULT_STEPS = 25
+DEFAULT_CFG = 7.0               # SDXL works best at 7-8
+DEFAULT_WIDTH = 832
+DEFAULT_HEIGHT = 1216           # JuggernautXL recommended portrait resolution
+DEFAULT_SAMPLER = "dpmpp_2m"
+DEFAULT_SCHEDULER = "karras"
+
+# --- Model settings ---
+CHECKPOINT_NAME = "Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors"
 
 # --- Output settings ---
 OUTPUT_DIR = "outputs"

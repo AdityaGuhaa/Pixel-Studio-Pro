@@ -1,22 +1,23 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.env
+# =============================
+# PixelStudio Pro - requirements.txt
+# =============================
 
-# Conda
-*.egg-info/
+# --- API framework ---
+fastapi==0.136.3
+uvicorn==0.48.0
 
-# Outputs
-outputs/
+# --- HTTP client ---
+httpx==0.28.1
 
-# Models
-models/
+# --- WebSocket client ---
+websockets==16.0
 
-# ComfyUI
-ComfyUI/
+# --- File handling ---
+aiofiles==25.1.0
+python-multipart==0.0.29
 
-# OS
-.DS_Store
-Thumbs.db
+# --- Image processing ---
+Pillow
+
+# --- Data validation (bundled with fastapi) ---
+pydantic

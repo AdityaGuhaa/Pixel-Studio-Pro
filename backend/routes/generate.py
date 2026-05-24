@@ -55,11 +55,13 @@ async def generate(request: GenerateRequest):
         )
 
     # --- Step 2: Generate image ---
+
+    print(f"DEBUG rewritten dict: {rewritten}")
     image_gen_start = time.time()
     try:
         result = await generate_image(
-            positive=rewritten["positive"],
-            negative=rewritten["negative"]
+            positive=rewritten.get("positive") or "photorealistic image, high quality, detailed",
+            negative=rewritten.get("negative") or "blurry, low quality, distorted, bad anatomy"
         )
     except Exception as e:
         raise HTTPException(
