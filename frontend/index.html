@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PixelStudio Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">PIXELSTUDIO <span>PRO</span></div>
+    <div class="nav-meta">
+      <span>LOCAL AI</span>
+      <span>EST. 2026</span>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-label">SYSTEM / IMAGE GENERATION</p>
+      <h1>GENERATE.<br>WITHOUT<br>LIMITS.</h1>
+      <p class="hero-sub">Local AI image generation with LLM prompt intelligence. Fully offline. RTX 4050 optimized.</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-badge">
+        <span class="badge-num">E2B</span>
+        <span class="badge-text">GEMMA 4<br>PROMPT AI</span>
+      </div>
+      <div class="hero-badge">
+        <span class="badge-num">XL</span>
+        <span class="badge-text">JUGGERNAUT<br>IMAGE MODEL</span>
+      </div>
+      <div class="hero-badge">
+        <span class="badge-num">6B</span>
+        <span class="badge-text">VRAM<br>OPTIMIZED</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Generator -->
+  <section class="generator">
+
+    <div class="gen-label">
+      <span>GENERATION INTERFACE</span>
+      <span class="dot"></span>
+    </div>
+
+    <div class="gen-grid">
+
+      <!-- Input Column -->
+      <div class="gen-input-col">
+        <div class="input-block">
+          <label class="block-label">DESCRIBE YOUR IMAGE</label>
+          <textarea
+            id="user-prompt"
+            placeholder="a samurai standing in a neon-lit Tokyo alley at midnight, rain reflecting off the pavement..."
+            rows="5"
+          ></textarea>
+        </div>
+
+        <div class="model-block">
+          <label class="block-label">PROMPT MODEL</label>
+          <div class="model-toggle">
+            <button class="model-btn active" data-model="e2b">
+              <span class="btn-title">E2B</span>
+              <span class="btn-sub">FASTER · 2B PARAMS</span>
+            </button>
+            <button class="model-btn" data-model="e4b">
+              <span class="btn-title">E4B</span>
+              <span class="btn-sub">SMARTER · 4B PARAMS</span>
+            </button>
+          </div>
+        </div>
+
+        <button id="generate-btn">
+          <span id="btn-text">GENERATE IMAGE</span>
+          <span id="btn-arrow">→</span>
+        </button>
+
+        <div id="status" class="status hidden"></div>
+      </div>
+
+      <!-- Output Column -->
+      <div class="gen-output-col">
+        <div class="output-block" id="output-block">
+          <div class="output-placeholder" id="output-placeholder">
+            <p>YOUR IMAGE<br>APPEARS HERE</p>
+          </div>
+          <img id="output-image" src="" alt="Generated image" class="hidden" />
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Result Details -->
+  <section id="result-section" class="result-section hidden">
+
+    <div class="gen-label">
+      <span>GENERATION REPORT</span>
+      <span class="dot"></span>
+    </div>
+
+    <div class="report-grid">
+
+      <div class="report-block prompt-block">
+        <label class="block-label">POSITIVE PROMPT</label>
+        <p id="positive-prompt"></p>
+      </div>
+
+      <div class="report-block prompt-block">
+        <label class="block-label">NEGATIVE PROMPT</label>
+        <p id="negative-prompt"></p>
+      </div>
+
+      <div class="report-block metric-block">
+        <label class="block-label">REWRITE</label>
+        <p id="rewrite-latency" class="metric-val"></p>
+      </div>
+
+      <div class="report-block metric-block">
+        <label class="block-label">GENERATION</label>
+        <p id="gen-latency" class="metric-val"></p>
+      </div>
+
+      <div class="report-block metric-block">
+        <label class="block-label">TOTAL</label>
+        <p id="total-latency" class="metric-val"></p>
+      </div>
+
+      <div class="report-block metric-block">
+        <label class="block-label">MODEL</label>
+        <p id="model-used" class="metric-val"></p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span>PIXELSTUDIO PRO</span>
+    <span>LOCAL · OFFLINE · PRIVATE</span>
+    <span>RTX 4050 · UBUNTU</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
