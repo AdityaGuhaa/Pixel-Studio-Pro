@@ -4,8 +4,6 @@
     <strong>Local AI image generation with LLM prompt intelligence</strong>
   </p>
 </p>
-<h2 align="center">Project Demo Video</h2>
-
 <p align="center">
   <a href="https://youtu.be/PKtixOQlr0w">
     <img 
@@ -14,6 +12,7 @@
       width="800"
     />
   </a>
+  <h3 align="center">Click on the Preview to Watch Demo Video</h3>
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white" alt="Python 3.10">
@@ -429,7 +428,7 @@ DEFAULT_SCHEDULER = "karras"
 
 **Aditya Guha** — AI & ML Engineer
 
-Final year B.Tech CSE (AI & ML) · DRDO R&DE(E) Research Lab internship alumni
+Final year B.Tech CSE (AI & ML) · Ex-DRDO R&DE(E) Robotics & Machine Learning Intern
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-adityaguha1-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/adityaguha1)
 [![GitHub](https://img.shields.io/badge/GitHub-AdityaGuhaa-181717?logo=github&logoColor=white)](https://github.com/AdityaGuhaa)
