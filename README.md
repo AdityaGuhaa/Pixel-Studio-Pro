@@ -4,7 +4,17 @@
     <strong>Local AI image generation with LLM prompt intelligence</strong>
   </p>
 </p>
+<h2 align="center">Project Demo Video</h2>
 
+<p align="center">
+  <a href="https://youtu.be/PKtixOQlr0w">
+    <img 
+      src="https://img.youtube.com/vi/PKtixOQlr0w/maxresdefault.jpg" 
+      alt="Watch the video" 
+      width="800"
+    />
+  </a>
+</p>
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white" alt="Python 3.10">
   <img src="https://img.shields.io/badge/FastAPI-0.136-009688?logo=fastapi&logoColor=white" alt="FastAPI">
