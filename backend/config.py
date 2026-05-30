@@ -15,8 +15,8 @@ COMFYUI_URL = f"http://{COMFYUI_HOST}:{COMFYUI_PORT}"
 COMFYUI_WS_URL = f"ws://{COMFYUI_HOST}:{COMFYUI_PORT}"
 
 # --- Model paths ---
-E2B_MODEL_PATH = "/home/adityaguha/gemma-4-E2B-it-Q4_K_M.gguf"
-E4B_MODEL_PATH = "/home/adityaguha/gemma-4-E4B-it-Q4_K_M.gguf"
+E2B_MODEL_PATH = "/Users/adityaguha/.lmstudio/models/lmstudio-community/gemma-4-E2B-it-GGUF/gemma-4-E2B-it-Q4_K_M.gguf"
+E4B_MODEL_PATH = "/Users/adityaguha/.lmstudio/models/lmstudio-community/gemma-4-E4B-it-GGUF/gemma-4-E4B-it-Q4_K_M.gguf"
 
 # --- Generation defaults ---
 DEFAULT_STEPS = 25
