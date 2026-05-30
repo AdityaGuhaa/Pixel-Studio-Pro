@@ -54,7 +54,7 @@ document.getElementById('generate-btn').addEventListener('click', async () => {
 
 async function renderResult(data) {
   // Show image
-  const imageUrl = `${COMFYUI_BASE}/view?filename=${data.image_filename}&type=output`;
+  const imageUrl = `${API_BASE}/api/image/${data.image_filename}`;
   const img = document.getElementById('output-image');
   const placeholder = document.getElementById('output-placeholder');
 
@@ -112,3 +112,16 @@ function hideStatus() {
 function hideResult() {
   document.getElementById('result-section').classList.add('hidden');
 }
+// --- Auto-detect system info ---
+async function loadSystemInfo() {
+  try {
+    const response = await fetch(`${API_BASE}/api/system`);
+    const data = await response.json();
+    const footer = document.querySelector('footer span:last-child');
+    if (footer) footer.textContent = data.platform;
+  } catch (err) {
+    console.log('System info unavailable');
+  }
+}
+
+loadSystemInfo();
