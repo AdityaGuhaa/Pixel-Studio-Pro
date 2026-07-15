@@ -48,8 +48,8 @@ async def compare(request: CompareRequest):
     e2b_gen_start = time.time()
     try:
         e2b_result = await generate_image(
-            positive=e2b_rewritten["positive"],
-            negative=e2b_rewritten["negative"]
+            positive=e2b_rewritten.get("positive", ""),
+            negative=e2b_rewritten.get("negative", "")
         )
     except Exception as e:
         raise HTTPException(
@@ -61,8 +61,8 @@ async def compare(request: CompareRequest):
     e4b_gen_start = time.time()
     try:
         e4b_result = await generate_image(
-            positive=e4b_rewritten["positive"],
-            negative=e4b_rewritten["negative"]
+            positive=e4b_rewritten.get("positive", ""),
+            negative=e4b_rewritten.get("negative", "")
         )
     except Exception as e:
         raise HTTPException(

@@ -1,23 +1,9 @@
-# =============================
-# PixelStudio Pro - requirements.txt
-# =============================
-
-# --- API framework ---
 fastapi==0.136.3
 uvicorn==0.48.0
-
-# --- HTTP client ---
 httpx==0.28.1
-
-# --- WebSocket client ---
 websockets==16.0
-
-# --- File handling ---
 aiofiles==25.1.0
 python-multipart==0.0.29
-
-# --- Image processing ---
 Pillow
-
-# --- Data validation (bundled with fastapi) ---
 pydantic
+psutil

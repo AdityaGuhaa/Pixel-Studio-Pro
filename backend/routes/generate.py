@@ -55,8 +55,6 @@ async def generate(request: GenerateRequest):
         )
 
     # --- Step 2: Generate image ---
-
-    print(f"DEBUG rewritten dict: {rewritten}")
     image_gen_start = time.time()
     try:
         result = await generate_image(

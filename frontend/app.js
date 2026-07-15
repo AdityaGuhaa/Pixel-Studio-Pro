@@ -2,8 +2,7 @@
 // PixelStudio Pro - app.js
 // =============================
 
-const API_BASE = 'http://127.0.0.1:8000';
-const COMFYUI_BASE = 'http://127.0.0.1:8188';
+const API_BASE = '';
 
 let selectedModel = 'e2b';
 
@@ -42,6 +41,7 @@ document.getElementById('generate-btn').addEventListener('click', async () => {
 
     const data = await response.json();
     showStatus('Loading image...');
+
     await renderResult(data);
     hideStatus();
 
@@ -60,7 +60,7 @@ async function renderResult(data) {
 
   await new Promise((resolve, reject) => {
     img.onload = resolve;
-    img.onerror = reject;
+    img.onerror = () => reject(new Error('Failed to load generated image'));
     img.src = imageUrl;
   });
 
@@ -125,3 +125,11 @@ async function loadSystemInfo() {
 }
 
 loadSystemInfo();
+
+// --- Theme toggle ---
+const themeBtn = document.getElementById('theme-btn');
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+  });
+}

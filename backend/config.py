@@ -3,6 +3,11 @@
 # Central configuration for all services
 # =============================
 
+import os
+
+# --- Base directory (project root) ---
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # --- llama.cpp server settings ---
 LLAMACPP_HOST = "http://127.0.0.1"
 LLAMACPP_PORT_E2B = 8080        # E2B model server port
@@ -14,9 +19,9 @@ COMFYUI_PORT = 8188
 COMFYUI_URL = f"http://{COMFYUI_HOST}:{COMFYUI_PORT}"
 COMFYUI_WS_URL = f"ws://{COMFYUI_HOST}:{COMFYUI_PORT}"
 
-# --- Model paths ---
-E2B_MODEL_PATH = "/Users/adityaguha/.lmstudio/models/lmstudio-community/gemma-4-E2B-it-GGUF/gemma-4-E2B-it-Q4_K_M.gguf"
-E4B_MODEL_PATH = "/Users/adityaguha/.lmstudio/models/lmstudio-community/gemma-4-E4B-it-GGUF/gemma-4-E4B-it-Q4_K_M.gguf"
+# --- Model paths (relative to project root) ---
+E2B_MODEL_PATH = os.path.join(BASE_DIR, "models", "gemma-4-E2B-it-Q4_K_M.gguf")
+E4B_MODEL_PATH = os.path.join(BASE_DIR, "models", "gemma-4-E4B-it-Q4_K_M.gguf")
 
 # --- Generation defaults ---
 DEFAULT_STEPS = 25
@@ -30,4 +35,4 @@ DEFAULT_SCHEDULER = "karras"
 CHECKPOINT_NAME = "Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors"
 
 # --- Output settings ---
-OUTPUT_DIR = "outputs"
+OUTPUT_DIR = os.path.join(BASE_DIR, "outputs")

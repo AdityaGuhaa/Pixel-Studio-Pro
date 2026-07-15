@@ -14,41 +14,26 @@ def build_workflow(
     width: int,
     height: int,
     sampler: str,
-    scheduler: str
+    scheduler: str,
+    seed: int = 0
 ) -> dict:
-    """
-    Builds a JuggernautXL (SDXL) compatible ComfyUI workflow JSON.
-    Standard node pipeline: Load Checkpoint -> CLIP Encode -> KSampler -> VAE Decode -> Save
-    """
 
     workflow = {
         "1": {
             "class_type": "CheckpointLoaderSimple",
-            "inputs": {
-                "ckpt_name": CHECKPOINT_NAME
-            }
+            "inputs": {"ckpt_name": CHECKPOINT_NAME}
         },
         "2": {
             "class_type": "CLIPTextEncode",
-            "inputs": {
-                "text": positive,
-                "clip": ["1", 1]
-            }
+            "inputs": {"text": positive, "clip": ["1", 1]}
         },
         "3": {
             "class_type": "CLIPTextEncode",
-            "inputs": {
-                "text": negative,
-                "clip": ["1", 1]
-            }
+            "inputs": {"text": negative, "clip": ["1", 1]}
         },
         "4": {
             "class_type": "EmptyLatentImage",
-            "inputs": {
-                "width": width,
-                "height": height,
-                "batch_size": 1
-            }
+            "inputs": {"width": width, "height": height, "batch_size": 1}
         },
         "5": {
             "class_type": "KSampler",
@@ -57,7 +42,7 @@ def build_workflow(
                 "positive": ["2", 0],
                 "negative": ["3", 0],
                 "latent_image": ["4", 0],
-                "seed": 0,
+                "seed": seed,
                 "steps": steps,
                 "cfg": cfg,
                 "sampler_name": sampler,
@@ -67,17 +52,11 @@ def build_workflow(
         },
         "6": {
             "class_type": "VAEDecode",
-            "inputs": {
-                "samples": ["5", 0],
-                "vae": ["1", 2]
-            }
+            "inputs": {"samples": ["5", 0], "vae": ["1", 2]}
         },
         "7": {
             "class_type": "SaveImage",
-            "inputs": {
-                "images": ["6", 0],
-                "filename_prefix": "pixelstudio_pro"
-            }
+            "inputs": {"images": ["6", 0], "filename_prefix": "pixelstudio_pro"}
         }
     }
 

@@ -137,106 +137,49 @@ PixelStudio-Pro/
 ## Installation
 
 ### Prerequisites
-
 - **Conda** (Miniconda or Anaconda)
-- **NVIDIA GPU** with CUDA support
-- **ComfyUI** installed separately
-- **llama.cpp** compiled with CUDA support
+- **NVIDIA GPU** with CUDA support (for Linux) or **Apple Silicon** (for Mac)
 
 ### Step 1: Clone the Repository
-
 ```bash
 git clone https://github.com/AdityaGuhaa/Pixel-Studio-Pro.git
 cd Pixel-Studio-Pro
 ```
 
-### Step 2: Create Conda Environment
-
-```bash
-conda create -n pixelstudio python=3.10 -y
-conda activate pixelstudio
-```
-
-### Step 3: Install Python Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Download Models
+### Step 2: Download Models
+Before installing, download the required models and place them in the `models/` directory:
 
 **Gemma 4 (LLM — prompt rewriting):**
-
-Download the GGUF quantized models from HuggingFace:
+Download the GGUF quantized models from HuggingFace and place them in `models/`:
 - `gemma-4-E2B-it-Q4_K_M.gguf` — 2B parameter model (faster)
 - `gemma-4-E4B-it-Q4_K_M.gguf` — 4B parameter model (higher quality)
 
-Place them in your home directory or update paths in `backend/config.py`.
-
 **JuggernautXL v9 (Image generation):**
+Download `Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors` from CivitAI and place it in the `models/` directory.
 
-Download `Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors` from CivitAI and place it in your ComfyUI `models/checkpoints/` directory.
+### Step 3: Run the Auto-Installer
+PixelStudio Pro includes an automated installer that will create your conda environment, download `llama.cpp` for your specific OS (Linux or Mac), and clone/setup `ComfyUI` automatically.
 
-### Step 5: Configure Paths
-
-Edit `backend/config.py` to match your local setup:
-
-```python
-# Model paths
-E2B_MODEL_PATH = "/path/to/gemma-4-E2B-it-Q4_K_M.gguf"
-E4B_MODEL_PATH = "/path/to/gemma-4-E4B-it-Q4_K_M.gguf"
-
-# ComfyUI checkpoint
-CHECKPOINT_NAME = "Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors"
+```bash
+bash install.sh
 ```
 
 ---
 
 ## Running the Services
 
-PixelStudio Pro requires three services running simultaneously. Open three terminal sessions:
-
-### Terminal 1: llama.cpp Server (E2B)
+You no longer need to open multiple terminal windows! PixelStudio Pro includes a one-command launcher that automatically boots the LLM server, the ComfyUI backend, and the FastAPI orchestration layer.
 
 ```bash
-./llama-server \
-  -m /path/to/gemma-4-E2B-it-Q4_K_M.gguf \
-  --port 8080 \
-  -ngl 99 \
-  -c 2048
-```
-
-### Terminal 2: llama.cpp Server (E4B) — Optional for comparison mode
-
-```bash
-./llama-server \
-  -m /path/to/gemma-4-E4B-it-Q4_K_M.gguf \
-  --port 8081 \
-  -ngl 99 \
-  -c 2048
-```
-
-### Terminal 3: ComfyUI (Headless)
-
-```bash
-cd /path/to/ComfyUI
-python main.py --listen 127.0.0.1 --port 8188
-```
-
-### Terminal 4: FastAPI Backend
-
-```bash
-cd Pixel-Studio-Pro
-uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+bash launch.sh
 ```
 
 ### Access the Application
-
-Open your browser and navigate to:
-
+The launcher will automatically open your default web browser. If it doesn't, navigate to:
 ```
-http://127.0.0.1:8000
+http://127.0.0.1:8001
 ```
+*(Note: To gracefully shut down all background services, simply press `Ctrl+C` in the terminal where the launcher is running).*
 
 ---
 

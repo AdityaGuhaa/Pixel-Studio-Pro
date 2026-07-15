@@ -52,8 +52,6 @@ async def rewrite_prompt(user_prompt: str, model: str = "e2b") -> dict:
     if not content:
         content = message.get("reasoning_content", "").strip()
 
-    print(f"DEBUG raw content: {repr(content[:200])}")
-
     # --- Parse JSON from content ---
     parsed = None
 

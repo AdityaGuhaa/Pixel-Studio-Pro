@@ -400,3 +400,33 @@ footer {
 
 /* ---- UTILS ---- */
 .hidden { display: none !important; }
+
+/* ---- THEME TOGGLE ---- */
+.theme-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--grey);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.theme-btn:hover {
+  background: var(--bg-2);
+  color: var(--white);
+}
+
+/* ---- LIGHT THEME OVERRIDES ---- */
+body.light-theme {
+  --bg: #f5f3f0;
+  --bg-2: #e8e5e0;
+  --bg-3: #dbd7d0;
+  --orange: #FF4D00;
+  --orange-dim: #cc3d00;
+  --white: #111111;
+  --grey: #555555;
+  --border: #d2cec6;
+}
